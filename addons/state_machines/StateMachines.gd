@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-var dock:EditorDock
+var dock
 var dock_content
 
 func _enable_plugin() -> void:
@@ -34,5 +34,15 @@ func _exit_tree() -> void:
 	
 func on_selection_changed():
 	var selected_nodes:Array[Node] = get_editor_interface().get_selection().get_selected_nodes()
+	print(selected_nodes)
 	if selected_nodes.size() != 1 :
-		pass
+		dock_content.show_no_selection()
+	else :
+		var children = selected_nodes[0].get_children()
+		if children.any(has_state_machine):
+			dock_content.show_graph()
+		else :
+			dock_content.show_no_state_machine()
+
+func has_state_machine(node):
+	return node is FiniteStateMachine

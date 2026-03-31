@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://kuoe4e17sk0l"]
 
+[ext_resource type="Script" uid="uid://dmf245si7l70h" path="res://addons/state_machines/state_machine_dock.gd" id="1_6qsnq"]
+
 [node name="StateMachineDock" type="VBoxContainer" unique_id=955006769]
 anchors_preset = 15
 anchor_right = 1.0
@@ -7,16 +9,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+script = ExtResource("1_6qsnq")
 
 [node name="NoSelectionLabel" type="Label" parent="." unique_id=170011186]
+auto_translate_mode = 2
+visible = false
 layout_mode = 2
-text = "Select an Entity"
+text = "Select a Node"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NoStateMachinePanel" type="Button" parent="." unique_id=1720823787]
+auto_translate_mode = 2
+visible = false
 layout_mode = 2
-text = "Create State Machine"
+text = "Create a State Machine"
 
 [node name="StateMachineGraph" type="GraphEdit" parent="." unique_id=974638921]
+visible = false
 layout_mode = 2
