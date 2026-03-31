@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://kuoe4e17sk0l"]
+
+[node name="StateMachineDock" type="VBoxContainer" unique_id=955006769]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="NoSelectionLabel" type="Label" parent="." unique_id=170011186]
+layout_mode = 2
+text = "Select an Entity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoStateMachinePanel" type="Button" parent="." unique_id=1720823787]
+layout_mode = 2
+text = "Create State Machine"
+
+[node name="StateMachineGraph" type="GraphEdit" parent="." unique_id=974638921]
+layout_mode = 2
