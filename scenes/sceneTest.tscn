@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://deb7gq6u7jtmx"]
+
+[ext_resource type="Script" uid="uid://cn5w6628vo8ep" path="res://addons/state_machines/FSM.gd" id="1_5qw34"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qw34"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3cgqe"]
+
+[node name="Node2D" type="Node2D" unique_id=1931148064]
+
+[node name="entity" type="CharacterBody2D" parent="." unique_id=1718965566]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entity" unique_id=1327619904]
+shape = SubResource("RectangleShape2D_5qw34")
+
+[node name="Sprite2D" type="Sprite2D" parent="entity" unique_id=2129310660]
+
+[node name="StateMachine" type="Node" parent="entity" unique_id=761177447]
+script = ExtResource("1_5qw34")
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=2114703473]
+
+[node name="Sprite2D" type="Sprite2D" parent="player" unique_id=1938004261]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=1442943310]
+shape = SubResource("CapsuleShape2D_3cgqe")

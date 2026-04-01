@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://kuoe4e17sk0l"]
 
 [ext_resource type="Script" uid="uid://dmf245si7l70h" path="res://addons/state_machines/state_machine_dock.gd" id="1_6qsnq"]
+[ext_resource type="Script" uid="uid://dmgqddup1ixx7" path="res://addons/state_machines/state_machine_graph.gd" id="2_ogeor"]
 
 [node name="StateMachineDock" type="VBoxContainer" unique_id=955006769]
 anchors_preset = 15
@@ -28,3 +29,6 @@ text = "Create a State Machine"
 [node name="StateMachineGraph" type="GraphEdit" parent="." unique_id=974638921]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
+show_arrange_button = false
+script = ExtResource("2_ogeor")

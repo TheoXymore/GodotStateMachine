@@ -1,17 +1,16 @@
-@abstract
 extends Node
 class_name State
 
 signal Transition
 
-@abstract
-func enter_state() -> void
+func enter_state() -> void:
+	pass
 	
-@abstract
-func exit_state() -> void
+func exit_state() -> void:
+	pass
 
-@abstract
-func update(delta : float) -> void
+func update(delta : float) -> void:
+	pass
 
-@abstract
-func physics_update(delta : float) -> void
+func physics_update(delta : float) -> void:
+	pass

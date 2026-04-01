@@ -4,6 +4,9 @@ extends EditorPlugin
 var dock
 var dock_content
 
+var selected_node:Node
+var selected_state_machine:FiniteStateMachine
+
 func _enable_plugin() -> void:
 	# Add autoloads here
 	pass
@@ -23,8 +26,8 @@ func _enter_tree() -> void:
 	dock.add_child(dock_content)
 	add_dock(dock)
 	
-	get_editor_interface().get_selection().selection_changed.connect(on_selection_changed)
-	# Initialization of the plugin goes here.
+	EditorInterface.get_selection().selection_changed.connect(on_selection_changed)
+	dock_content.FSMCreation.connect(state_machine_initialization)
 
 
 func _exit_tree() -> void:
@@ -33,16 +36,32 @@ func _exit_tree() -> void:
 	dock = null
 	
 func on_selection_changed():
-	var selected_nodes:Array[Node] = get_editor_interface().get_selection().get_selected_nodes()
-	print(selected_nodes)
+	var selected_nodes:Array[Node] = EditorInterface.get_selection().get_selected_nodes()
 	if selected_nodes.size() != 1 :
 		dock_content.show_no_selection()
 	else :
-		var children = selected_nodes[0].get_children()
-		if children.any(has_state_machine):
+		selected_node = selected_nodes[0]
+		var children = selected_node.get_children()
+		if children.any(has_state_machine) or selected_node is FiniteStateMachine:
 			dock_content.show_graph()
 		else :
 			dock_content.show_no_state_machine()
 
 func has_state_machine(node):
 	return node is FiniteStateMachine
+	
+func state_machine_initialization()->void:
+	var parent:Node = EditorInterface.get_selection().get_selected_nodes()[0]
+	var fsm:FiniteStateMachine = FiniteStateMachine.new()
+	fsm.name = "StateMachine"
+	
+	var undo_redo = get_undo_redo()
+	undo_redo.create_action("Create State Machine")
+	undo_redo.add_do_method(parent,"add_child",fsm)
+	undo_redo.add_do_method(fsm,"set_owner",EditorInterface.get_edited_scene_root())
+	undo_redo.add_undo_method(parent,"remove_child",fsm)
+	
+	undo_redo.commit_action()
+
+	selected_state_machine = fsm
+	dock_content.show_graph()  

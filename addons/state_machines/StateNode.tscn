@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://d12nqrguxf0vo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f7ncd"]
+bg_color = Color(0, 0, 0, 0.1882353)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 0.1882353)
+corner_radius_top_left = 250
+corner_radius_top_right = 250
+corner_radius_bottom_right = 250
+corner_radius_bottom_left = 250
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgolq"]
+bg_color = Color(0, 0, 0, 0.1882353)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 0.5647059)
+corner_radius_top_left = 250
+corner_radius_top_right = 250
+corner_radius_bottom_right = 250
+corner_radius_bottom_left = 250
+corner_detail = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mm6m3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ejvv"]
+
+[node name="Control" type="GraphNode" unique_id=508495003]
+anchors_preset = -1
+anchor_right = 0.43400002
+anchor_bottom = 0.772
+offset_right = 0.031982422
+offset_bottom = -0.25601196
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f7ncd")
+theme_override_styles/panel_selected = SubResource("StyleBoxFlat_pgolq")
+theme_override_styles/panel_focus = SubResource("StyleBoxFlat_pgolq")
+theme_override_styles/titlebar = SubResource("StyleBoxEmpty_mm6m3")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxEmpty_8ejvv")
