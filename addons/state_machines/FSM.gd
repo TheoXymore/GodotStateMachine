@@ -1,7 +1,15 @@
 extends Node
 class_name FiniteStateMachine
 
-@export var initial_state:State
+# --- Editor data (do not use at runtime) ---
+@export var _editor_state_positions: Dictionary = {}  # state_name -> Vector2
+@export var _editor_transitions: Array = []           # Array de [String, String]
+@export var _editor_initial_state: String = ""
+
+@export var initial_state:State:
+	set(value):
+		initial_state = value
+
 var current_state:State
 var states : Dictionary = {}
 

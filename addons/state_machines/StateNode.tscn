@@ -30,6 +30,9 @@ corner_detail = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ejvv"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_f7ncd"]
+font_size = 64
+
 [node name="Control" type="GraphNode" unique_id=508495003]
 anchors_preset = -1
 anchor_right = 0.43400002
@@ -43,3 +46,20 @@ theme_override_styles/panel_selected = SubResource("StyleBoxFlat_pgolq")
 theme_override_styles/panel_focus = SubResource("StyleBoxFlat_pgolq")
 theme_override_styles/titlebar = SubResource("StyleBoxEmpty_mm6m3")
 theme_override_styles/titlebar_selected = SubResource("StyleBoxEmpty_8ejvv")
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+
+[node name="Label" type="Label" parent="." unique_id=97857567]
+layout_mode = 2
+size_flags_vertical = 6
+text = "State"
+label_settings = SubResource("LabelSettings_f7ncd")
+horizontal_alignment = 1
+vertical_alignment = 1

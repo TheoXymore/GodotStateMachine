@@ -28,6 +28,8 @@ func _enter_tree() -> void:
 	
 	EditorInterface.get_selection().selection_changed.connect(on_selection_changed)
 	dock_content.FSMCreation.connect(state_machine_initialization)
+	
+	dock_content.state_machine_graph.change_initial_state.connect(change_initial_state)
 
 
 func _exit_tree() -> void:
@@ -43,6 +45,11 @@ func on_selection_changed():
 		selected_node = selected_nodes[0]
 		var children = selected_node.get_children()
 		if children.any(has_state_machine) or selected_node is FiniteStateMachine:
+			if selected_node is FiniteStateMachine :
+				selected_state_machine = selected_node
+			else :
+				selected_state_machine = get_first_state_machine(children)
+			#dock_content.state_machine_graph.load_from_state_machine(selected_state_machine)
 			dock_content.show_graph()
 		else :
 			dock_content.show_no_state_machine()
@@ -65,3 +72,13 @@ func state_machine_initialization()->void:
 
 	selected_state_machine = fsm
 	dock_content.show_graph()  
+
+func change_initial_state(state:GraphState):
+	selected_state_machine._editor_initial_state = state.state_name
+	selected_state_machine.initial_state = selected_state_machine.find_child(state.state_name)
+
+func get_first_state_machine(nodes:Array[Node]):
+	for node in nodes:
+		if node is FiniteStateMachine:
+			return node
+	return null
