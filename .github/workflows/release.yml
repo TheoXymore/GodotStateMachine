@@ -1,4 +1,6 @@
 name: Package Addon
+permissions:
+  contents: write
 
 on:
   push:
