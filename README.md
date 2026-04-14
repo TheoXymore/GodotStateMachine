@@ -2,6 +2,8 @@
 
 Godot plugin project for easy state machine creation and development.  
 
+[Plugin download](https://github.com/TheoXymore/GodotStateMachine/releases/latest/download/state_machines.zip)
+
 The goal of this plugin is to provide an easy-to-use interface for state machine conception in your games. This interface allows the developper to add states and transition, and generate the corresponding scripts to be implemented by the developper.
 
 Currently, you can 
