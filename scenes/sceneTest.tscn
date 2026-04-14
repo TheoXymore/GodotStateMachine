@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://deb7gq6u7jtmx"]
 
 [ext_resource type="Script" uid="uid://cn5w6628vo8ep" path="res://addons/state_machines/FSM.gd" id="1_5qw34"]
+[ext_resource type="Script" uid="uid://cusk3b01qq44u" path="res://machine2/state_test.gd" id="2_j581t"]
+[ext_resource type="Script" uid="uid://mqjxi0eoa3qu" path="res://states/state_bob.gd" id="3_jvsl4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qw34"]
 
@@ -15,6 +17,16 @@ shape = SubResource("RectangleShape2D_5qw34")
 
 [node name="Sprite2D" type="Sprite2D" parent="entity" unique_id=2129310660]
 
+[node name="StateMachine" type="Node" parent="entity" unique_id=1291700111]
+script = ExtResource("1_5qw34")
+scripts_location = "res://machine2"
+_editor_state_positions = Dictionary[String, Vector2]({
+"Test": Vector2(531, 209.5)
+})
+
+[node name="Test" type="Node" parent="entity/StateMachine" unique_id=1309637957]
+script = ExtResource("2_j581t")
+
 [node name="player" type="CharacterBody2D" parent="." unique_id=2114703473]
 
 [node name="Sprite2D" type="Sprite2D" parent="player" unique_id=1938004261]
@@ -22,6 +34,11 @@ shape = SubResource("RectangleShape2D_5qw34")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=1442943310]
 shape = SubResource("CapsuleShape2D_3cgqe")
 
-[node name="StateMachine" type="Node" parent="player" unique_id=462591588]
+[node name="PlayerStateMachine" type="Node" parent="player" unique_id=462591588]
 script = ExtResource("1_5qw34")
-scripts_location = null
+_editor_state_positions = Dictionary[String, Vector2]({
+"BOB": Vector2(532, 235.5)
+})
+
+[node name="BOB" type="Node" parent="player/PlayerStateMachine" unique_id=339014373]
+script = ExtResource("3_jvsl4")

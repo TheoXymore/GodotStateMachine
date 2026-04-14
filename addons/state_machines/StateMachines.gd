@@ -94,7 +94,6 @@ func update_state(old_state_name : String,state_name: String, position: Vector2)
 		#Script creation
 		var script = GDScript.new()
 		script.source_code = """extends State
-class_name %s
 
 func enter_state() -> void:
 	pass
@@ -107,16 +106,15 @@ func update(delta: float) -> void:
 
 func physics_update(delta: float) -> void:
 	pass
-	""" % ("State" + state_name)
-		var dir = DirAccess.open("res://")
-		if not dir.dir_exists("res://states"):
-			dir.make_dir("res://states")
-		dir = dir.open("res://states")
+	"""
+		var path = selected_state_machine.scripts_location
+		ensure_dir_exists(path)
+		var dir = DirAccess.open(path)
 		var script_path = "%s/%s.gd" % [dir.get_current_dir(), ("state_" + state_name.to_lower())]
 		ResourceSaver.save(script, script_path)
 		
 		# Node creation
-		var state_node = load("res://addons/state_machines/State.gd").new()
+		var state_node = State.new()
 		state_node.name = state_name
 		state_node.set_script(load(script_path))
 		
@@ -136,18 +134,14 @@ func physics_update(delta: float) -> void:
 		state_to_update.name = state_name
 		
 		#Update script path and class_name
-		var old_path = "res://states/state_%s.gd" % old_state_name.to_lower()
-		var new_path = "res://states/state_%s.gd" % state_name.to_lower()
+		var old_path = "%s/state_%s.gd" % [selected_state_machine.scripts_location,old_state_name.to_lower()]
+		var new_path = "%s/state_%s.gd" % [selected_state_machine.scripts_location,state_name.to_lower()]
 
 		var script = load(old_path) as GDScript
-		script.source_code = script.source_code.replace(
-			"class_name State%s" % old_state_name,
-			"class_name State%s" % state_name
-		)
 		ResourceSaver.save(script, new_path)
 		state_to_update.set_script(load(new_path))
 		# Delete old file
-		OS.move_to_trash(ProjectSettings.globalize_path("res://states/state_%s.gd" % old_state_name.to_lower()))			
+		OS.move_to_trash(ProjectSettings.globalize_path("%s/state_%s.gd" % [selected_state_machine.scripts_location,old_state_name.to_lower()]))			
 		
 		# Update the editor data
 		# States and positions
@@ -188,7 +182,7 @@ func new_transition(from:GraphState,to:GraphState):
 		selected_state_machine._editor_transitions.append(transition)
 		dock_content.state_machine_graph.on_created_transition(transition)
 		# Ajout de la méthode dans le script du state FROM
-		var path = "res://states/state_%s.gd" % from.state_name.to_lower()
+		var path = "%s/state_%s.gd" % [selected_state_machine.scripts_location,from.state_name.to_lower()]
 		var script = load(path) as GDScript
 		
 		var func_name = "transition_to_%s" % to.state_name.to_lower()
@@ -220,3 +214,7 @@ func remove_state(name:String)->void:
 	
 func remove_transition(id:int)->void:
 	selected_state_machine._editor_transitions.remove_at(id)
+
+func ensure_dir_exists(path: String) -> void:
+	if not DirAccess.dir_exists_absolute(path):
+		DirAccess.make_dir_recursive_absolute(path)
