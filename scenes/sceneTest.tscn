@@ -15,10 +15,6 @@ shape = SubResource("RectangleShape2D_5qw34")
 
 [node name="Sprite2D" type="Sprite2D" parent="entity" unique_id=2129310660]
 
-[node name="StateMachine" type="Node" parent="entity" unique_id=761177447]
-script = ExtResource("1_5qw34")
-_editor_initial_state = "Test"
-
 [node name="player" type="CharacterBody2D" parent="." unique_id=2114703473]
 
 [node name="Sprite2D" type="Sprite2D" parent="player" unique_id=1938004261]
@@ -26,8 +22,6 @@ _editor_initial_state = "Test"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=1442943310]
 shape = SubResource("CapsuleShape2D_3cgqe")
 
-[node name="StateMachine2" type="Node" parent="player" unique_id=1412055757]
+[node name="StateMachine" type="Node" parent="player" unique_id=462591588]
 script = ExtResource("1_5qw34")
-_editor_state_positions = null
-_editor_transitions = null
-_editor_initial_state = null
+scripts_location = null

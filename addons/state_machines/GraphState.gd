@@ -1,5 +1,8 @@
+#Class to represent a State Node in a graph
 extends GraphElement
 class_name GraphState
+
+signal state_renamed
 
 const CIRCLE_COLOR = Color(0.15, 0.15, 0.15, 0.7)
 const BORDER_COLOR = Color(1.0, 1.0, 1.0)
@@ -60,6 +63,9 @@ func start_rename() -> void:
 	line_edit.select_all()
 
 func on_name_submitted(new_name:String)->void:
+	var old_name:String
 	if new_name != "":
+		old_name = state_name
 		state_name = new_name
+		state_renamed.emit(old_name,self)
 	line_edit.hide()
